@@ -6,13 +6,16 @@ var upperLetters = lowerLetters.map(letter => letter.toUpperCase())
 var numeric = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 var special = ['!', '@', '-', '_', '+', '$', '%']
 var charArray = [lowerLetters, upperLetters, numeric, special]
+
+//creating an object so that the password can be used in a global scope
 var myPass = {};
 // Write password to the #password input
 function writePassword() {
   generatePassword();
   var passwordText = document.querySelector("#password");
 
-  // code snippet from https://www.codespeedy.com/shuffle-characters-of-a-string-in-javascript/
+  // shuffle function snippet from https://www.codespeedy.com/shuffle-characters-of-a-string-in-javascript/
+  //shuffling letters in the password so they aren't all in order of the lists
   function shuffle(s) {
     var arr = s.split('');           // Convert String to array
     var n = arr.length;              // Length of the array
@@ -46,6 +49,7 @@ function generatePassword() {
     var numericChars = confirm('Do you want numeric characters?')
     var specialChars = confirm('Do you want special characters?')
     
+    //getting an array of confirmed characters to use later
     var confirmedChars = [lowercaseChars, uppercaseChars, numericChars, specialChars]
     var chosenChars=[]
     for (var i = 0; i < charArray.length; i++) {
@@ -53,8 +57,7 @@ function generatePassword() {
         chosenChars.push(charArray[i])
       }
     }
-    console.log(chosenChars)
-    // invoke validate criteria once all of the confirms have run
+    //validate criteria once all of the confirms have run
     //check if at least one character type was choosen
     var validate =  0
     var confirmedChars = [lowercaseChars, uppercaseChars, numericChars, specialChars]
@@ -70,18 +73,18 @@ function generatePassword() {
       console.log(validate)
     }
     if (validate === 4) {
-      alert('No types were choosen try again.')
-      generatePassword()
-    } else {
+      var confirmTryAgain = confirm('No types were choosen try again. would you like to try again?')
+      if (confirmTryAgain === true) {
+        generatePassword()
+      } else {
+        return
+      }
+    }
+    else {
       getPassword()
       console.log(myPass.pass)
     }
        
-    
-    
-
-    // get a list of arrays of characters that want to be added 
-
     //using the validated criteria, generating a password for the user 
     function getPassword() {
       var chars = 0
@@ -91,7 +94,8 @@ function generatePassword() {
           chars += 1
         } 
       }
-      console.log(chars)
+
+      // creating a random amount of each character type, for each of the possible amount of types chosen
       if (chars === 4) {
         var randomLength1 = Math.floor(Math.random()*(passLength-3))
         var randomLength2 = Math.floor(Math.random()*(passLength-randomLength1-2))
@@ -115,7 +119,6 @@ function generatePassword() {
           var randomLengthArray = [randomLength1]
       }
       
-      console.log(randomLengthArray)
       // going through each of the confirmed characters and if they are true
       // adding a random character to the password
       var newPassword =[]
