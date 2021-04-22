@@ -16,23 +16,8 @@ function writePassword() {
 
   // shuffle function snippet from https://www.codespeedy.com/shuffle-characters-of-a-string-in-javascript/
   //shuffling letters in the password so they aren't all in order of the lists
-  function shuffle(s) {
-    var arr = s.split('');           // Convert String to array
-    var n = arr.length;              // Length of the array
-    
-    for(var i=0 ; i<n-1 ; ++i) {
-      var j = Math.floor(Math.random()*n);       // Get random of [0, n-1]
-      
-      var temp = arr[i];             // Swap arr[i] and arr[j]
-      arr[i] = arr[j];
-      arr[j] = temp;
-    }
-    
-    s = arr.join('');                // Convert Array to string
-    return s; 
-  }
-  password2 = shuffle(myPass.pass)
-  passwordText.value = password2;
+  
+  passwordText.value = myPass.pass;
 
 }
 
@@ -129,7 +114,23 @@ function generatePassword() {
         }        
       }
       password1 = newPassword.join('')
-      myPass.pass = password1
+      function shuffle(s) {
+        var arr = s.split('');           // Convert String to array
+        var n = arr.length;              // Length of the array
+        
+        for(var i=0 ; i<n-1 ; ++i) {
+          var j = Math.floor(Math.random()*n);       // Get random of [0, n-1]
+          
+          var temp = arr[i];             // Swap arr[i] and arr[j]
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+        
+        s = arr.join('');                // Convert Array to string
+        return s; 
+      }
+      password2 = shuffle(password1)
+      myPass.pass = password2
 
     }    
   } 
