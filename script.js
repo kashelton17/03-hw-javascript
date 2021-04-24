@@ -14,8 +14,7 @@ function writePassword() {
   generatePassword();
   var passwordText = document.querySelector("#password");
 
-  // shuffle function snippet from https://www.codespeedy.com/shuffle-characters-of-a-string-in-javascript/
-  //shuffling letters in the password so they aren't all in order of the lists
+
   
   passwordText.value = myPass.pass;
 
@@ -114,6 +113,9 @@ function generatePassword() {
         }        
       }
       password1 = newPassword.join('')
+      
+      // shuffle function snippet from https://www.codespeedy.com/shuffle-characters-of-a-string-in-javascript/
+      //shuffling letters in the password so they aren't all in order of the lists
       function shuffle(s) {
         var arr = s.split('');           // Convert String to array
         var n = arr.length;              // Length of the array
